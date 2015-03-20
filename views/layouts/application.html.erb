@@ -8,8 +8,17 @@
       <h3> I'm a header</h3>
       <p>Put things in the header</p>
       <%= link_to('ESPN', 'http://ESPN.com') %>
-
+      <% if @request.query['first_name'] && !@request.query['first_name'].empty? %>
+        Hello <%= @request.query['first_name'] %><% if @request.query['egg_preference'] %>, I heard you like eggs<% end %>
+      <% else %>
+        Enter your name
+      <% end %>
     </p>
+    <form method='post' action="<%= @request.path %>">
+        First name: <input type="text" name="first_name" placeholder='first name'/><br />
+        Check if you like eggs <input type="checkbox" name="egg_preference" /><br />
+        <input type="submit" value="Submit" />
+    </form>
     <hr />
     <div>
       <%= yield %>
